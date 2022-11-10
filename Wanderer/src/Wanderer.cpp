@@ -56,13 +56,7 @@ pthread_mutex_t mutx;
 ROOM room[MAX_ROOM];
 std::vector<int> room_sock[MAX_ROOM];
 
-std::string hostName = "127.0.0.1";
-std::string userId = "root";
-std::string password = "kiiamm12";
-std::string DB = "GAMEDB";
-
 int main(int argc, char *argv[]) {
-	std::cout << "최종 빌드 22-10-31 17:18 project end\n";
 	int serv_sock, clnt_sock;
 	struct sockaddr_in serv_adr, clnt_addr;
 	socklen_t clnt_addr_sz;
@@ -72,10 +66,16 @@ int main(int argc, char *argv[]) {
 	time_t timer = time(NULL);
 	t = localtime(&timer);
 
-	if (argc != 2) {
-		printf(" Usage : %s <port>\n", argv[0]);
-		exit(1);
+	if(argc != 6 )
+	{
+		std::cout<<"Invalid argc :" << argc<<"\n";
+		return 0;
 	}
+
+	std::string hostName = argv[2];
+	std::string userId = argv[3];
+	std::string password = argv[4];
+	std::string DB = argv[5];
 
 	int mysql_status = 0;
 	MYSQL_RES *mysql_res = NULL;
